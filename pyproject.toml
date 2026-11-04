@@ -1,6 +1,6 @@
 [project]
 name = "py-block-decomposition"
-version = "0.1.1"
+version = "0.1.2"
 description = "Tracks a pending add per block to apply range updates in O(number of blocks) instead of O(number of elements)."
 requires-python = ">=3.10"
 dependencies = []
