@@ -34,3 +34,10 @@ This library picks the middle ground: fixed-size blocks, one pending integer del
 ## The awkward edge
 
 A partial update that touches only part of a block cannot be represented by the block's delta alone, because the delta applies to the whole block. The implementation handles this by first pushing the block's existing delta onto all of its elements, zeroing the delta, and then applying the partial update directly. This is O(block_size) and happens at most twice per `apply` call. If your workload is dominated by tiny partial updates, pick a smaller `block_size`; if it is dominated by wide full-block updates, pick a larger one.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
